@@ -34,3 +34,5 @@ In the Hacker project, to pass the final test, I had to remove the `&& maxValid 
 2. While the test was likely designed for 2023, since we are now in 2025, the final test would not pass when comparing joining validity dates to the current date
 
 This change allows the tests to pass without modifying the underlying student data.
+
+I also added a small check and error message to the check validity function to ensure that a user with the same name should not be added twice
