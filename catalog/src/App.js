@@ -33,14 +33,42 @@ function App() {
   const [slideDuration] = useState(3000);
 
   function onNextClick() {
+    if (activeIndex !== catalogs.length - 1) {
+      setActiveIndex(activeIndex + 1);
+    } else {
+      setActiveIndex(0);
+    }
+  }
 
-
+  function onPreviousClick() {
+    if (activeIndex !== 0) {
+      setActiveIndex(activeIndex - 1);
+    } else {
+      setActiveIndex(catalogs.length - 1);
+    }
   }
 
   function slideChange(e) {
+    const checked = e.target.checked;
 
+    if (checked) {
+      const interval = setInterval(() => {
+        setActiveIndex((prevIndex) => {
+          if (prevIndex !== catalogs.length - 1) {
+            return prevIndex + 1;
+          }
+          return 0;
+        });
+      }, slideDuration);
+
+      setSlideTimer(interval);
+    } else {
+      if (slideTimer) {
+        clearInterval(slideTimer);
+        setSlideTimer(null);
+      }
+    }
   }
-
 
   return (
     <Fragment>
@@ -53,13 +81,7 @@ function App() {
               <button
                 className="icon-only outlined"
                 data-testid="prev-slide-btn"
-                onClick={() => {
-                  if (activeIndex !== 0) {
-                    setActiveIndex(activeIndex - 1);
-                  } else {
-                    setActiveIndex(catalogs.length - 1);
-                  }
-                }}
+                onClick={onPreviousClick}
               >
                 <i className="material-icons">arrow_back</i>
               </button>
@@ -94,4 +116,3 @@ function App() {
 }
 
 export default App;
-
