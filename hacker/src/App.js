@@ -14,9 +14,13 @@ function App() {
     <div className="App">
       <h8k-navbar header={title}></h8k-navbar>
       <div className="layout-column justify-content-center align-items-center w-50 mx-auto">
-        <Search  setErrorText={setErrorText}/>
+        <Search
+          residents={residents}
+          setResidents={setResidents}
+          setErrorText={setErrorText}
+        />
         {errorText && <Error errorText={errorText} />}
-        <ResidentsList  />
+        <ResidentsList residents={residents} />
       </div>
     </div>
   );
